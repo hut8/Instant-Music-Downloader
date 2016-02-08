@@ -145,11 +145,9 @@ def query_and_download(search, has_prompts=True, is_quiet=False):
             except:
                 audiofile = eyed3.load((title+'.m4a'))
 
-            url = 'https://www.google.com/search?q='+qp(title)
-            req = requests.get(url)
-            response = req.text
-            result=response
-            lyrics_url = get_lyrics_url(result)
+            response = requests.get('https://www.google.com/search',
+                                    {'q': title}).text
+            lyrics_url = get_lyrics_url(response)
             print(lyrics_url)
             lyrics_response = requests.get(lyrics_url)
             html_doc =  lyrics_response.text
