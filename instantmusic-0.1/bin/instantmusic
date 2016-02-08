@@ -27,7 +27,7 @@ def extract_videos(html):
     soup = BeautifulSoup(html, 'html.parser')
     pattern = re.compile(r'/watch\?v=')
     found = soup.find_all('a', 'yt-uix-tile-link', href=pattern)
-    return [(x.text.encode('utf-8'), x.get('href')) for x in found]
+    return [(x.text, x.get('href')) for x in found]
 
 def grab_albumart(search=''):
     search = qp(search)
@@ -49,7 +49,7 @@ def grab_albumart(search=''):
 
 def list_movies(movies):
     for idx, (title, _) in enumerate(movies):
-        yield '[{}] {}'.format(idx, title.decode('utf-8').encode(sys.stdout.encoding))
+        yield '[{}] {}'.format(idx, title)
 
 def get_lyrics_url(response):
     """
