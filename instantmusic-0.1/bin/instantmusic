@@ -104,7 +104,9 @@ def query_and_download(search, has_prompts=True, is_quiet=False):
             sys.exit(2) # Indicate failure using the exit code
         else:
             if has_prompts:
-                print('Found:\n', '\n'.join(list_movies(available)))
+                print('Found:')
+                for title in list_movies(available):
+                    print(title)
 
     # We only ask the user which one they want if prompts are on, of course
     if has_prompts and not is_quiet:
