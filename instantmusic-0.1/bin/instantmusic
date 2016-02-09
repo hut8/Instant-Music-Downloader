@@ -19,6 +19,15 @@ if (sys.version_info > (3, 0)):
 else:
     from urllib import quote_plus as qp
 
+# deal with the Windows Console's inability to handle Unicode
+if sys.platform == 'win32' and sys.stdout.isatty():
+    try:
+        import win_unicode_console
+        win_unicode_console.enable()
+    except ImportError:
+        print("win_unicode_console module not found. Expect Unicode weirdness")
+        print("To resolve, run:\n\tpip install win_unicode_console")
+
 
 def extract_videos(html):
     """
