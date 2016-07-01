@@ -28,7 +28,6 @@ if sys.platform == 'win32' and sys.stdout.isatty():
         print("win_unicode_console module not found. Expect Unicode weirdness")
         print("To resolve, run:\n\tpip install win_unicode_console")
 
-
 def extract_videos(html):
     """
     Parses given html and returns a list of (Title, Link) for
@@ -114,15 +113,9 @@ def query_and_download(search, has_prompts=True, is_quiet=False):
         while choice.strip() == '':
             choice = raw_input('Pick one: ')
         title, video_link = available[int(choice)]
-
-        valid = ['Y', 'y', '']
-        prompt = raw_input('Download "%s"? (y/n) ' % title)
-        if prompt.lower() not in valid:
-            sys.exit()
     # Otherwise, just download the first in available list
     else:
         title, video_link = available[0]
-
 
     command_tokens = [
         'youtube-dl',
